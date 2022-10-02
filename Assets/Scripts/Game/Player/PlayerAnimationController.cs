@@ -14,6 +14,7 @@ public class PlayerAnimationController : MonoBehaviour
     [SerializeField] float velocityMagnitudeThreshold = 1.5f;
     [SerializeField] Rigidbody2D PlayerRigidbody;
     [SerializeField] PlayerWeaponHandler PlayerWeaponHandler;
+    [SerializeField] private Transform PlayerModel;
 
     public void UpdateAnimation()
     {
@@ -30,7 +31,7 @@ public class PlayerAnimationController : MonoBehaviour
         if (!animationController.GetBool("Dead"))
         {
             var angle = Mathf.Atan2(PlayerWeaponHandler.AimDirection.y, PlayerWeaponHandler.AimDirection.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            PlayerModel.transform.localRotation = Quaternion.AngleAxis(angle, Vector3.down);
         }
     }
     public void SetPlayerDead(bool dead)
