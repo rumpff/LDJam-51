@@ -33,6 +33,12 @@ public class PlayerWeaponHandler : WeaponHandler
     {
         Weapon?.TriggerHeld();
     }
+
+    public override void KnockBack(Vector2 force)
+    {
+        _player.PlayerRigidbody.AddForce(force);
+    }
+
     public override void NewWeaponInstance(WeaponScriptableObject weapon)
     {
         base.NewWeaponInstance(weapon);

@@ -38,6 +38,11 @@ public class WeaponHandler : MonoBehaviour
         
     }
 
+    public virtual void KnockBack(Vector2 force)
+    {
+
+    }
+
     public void WeaponPickup(IWeaponState state, WeaponScriptableObject weapon)
     {
         _weaponState?.OnExit();

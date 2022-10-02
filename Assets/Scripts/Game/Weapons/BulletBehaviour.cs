@@ -16,7 +16,7 @@ public class BulletBehaviour : ScriptableObject
     [SerializeField] private bool _destroyOnImpact = true;
 
     public float InitialSpeed => _initialSpeed;
-    public float Lifetime => Lifetime;
+    public float Lifetime => _lifetime;
     public float AimRandom => (_aimRandom * Mathf.Deg2Rad);
     public float SpeedRandom => _speedRandom;
     public float Drag => _drag;

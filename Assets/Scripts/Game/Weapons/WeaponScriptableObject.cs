@@ -8,6 +8,7 @@ public class WeaponScriptableObject : ScriptableObject
     [SerializeField] private float _cooldownDuration = 0.1f;
     [SerializeField] private int _bulletAmount = 1;
     [SerializeField] private float _timeBetweenShots = 0;
+    [SerializeField] private float _knockbackForce = 0;
     [SerializeField] private BulletBehaviour _bulletBehaviour;
     [Space(5)]
     [SerializeField] private GameObject _weaponPrefab;
@@ -17,6 +18,7 @@ public class WeaponScriptableObject : ScriptableObject
     public float CooldownDuration => _cooldownDuration;
     public int BulletAmount => _bulletAmount;
     public float TimeBetweenShots => _timeBetweenShots;
+    public float KnockbackForce => _knockbackForce;
     public BulletBehaviour BulletBehaviour => _bulletBehaviour;
     public GameObject WeaponPrefab => _weaponPrefab;
     public GameObject BulletPrefab => _bulletPrefab;

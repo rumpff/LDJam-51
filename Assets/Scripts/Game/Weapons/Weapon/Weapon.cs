@@ -65,6 +65,7 @@ public class Weapon : MonoBehaviour
             var bObject = Instantiate(_weaponScriptable.BulletPrefab, _muzzleEnd.position, Quaternion.identity);
             Bullet bullet = bObject.GetComponent<Bullet>();
             bullet.Initialize(_weaponScriptable.BulletBehaviour, _weaponHandler.AimAngle);
+            _weaponHandler.KnockBack(_weaponHandler.AimDirection * _weaponScriptable.KnockbackForce *-1);
 
             shotCount--;
             _cooldownTimer = _weaponScriptable.CooldownDuration;

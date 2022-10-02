@@ -20,5 +20,47 @@ public class Bullet : MonoBehaviour
             x = Mathf.Cos(angle) * speed,
             y = Mathf.Sin(angle) * speed
         };
+
+        _rigidbody.drag = behaviour.Drag;
+
+        StartCoroutine(LifetimeKill(behaviour.Lifetime));
+    }
+
+    public void Kill()
+    {
+        Destroy(gameObject);
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        switch (collision.gameObject.tag)
+        {
+            case "Player":
+                {
+                    if (_behaviour.DestroyOnKill)
+                        Kill();
+                }
+                break;
+
+            case "Enemy":
+                {
+                    if (_behaviour.DestroyOnKill)
+                        Kill();
+                }
+                break;
+
+            default:
+                {
+                    if(_behaviour.DestroyOnImpact)
+                        Kill();
+                }
+                break;
+        }
+    }
+
+    private IEnumerator LifetimeKill(float length)
+    {
+        yield return new WaitForSeconds(length);
+        Kill();
     }
 }
