@@ -6,7 +6,7 @@ public class Player : MonoBehaviour
 {
     // Components
     public PlayerMovementHandler PlayerMovement { get; private set; }
-    public PlayerWeaponHandler PlayerWeapon { get; private set; }
+    public WeaponHandler PlayerWeapon { get; private set; }
     public Rigidbody2D PlayerRigidbody { get; private set; }
 
     private IPlayerState _state;
@@ -15,16 +15,19 @@ public class Player : MonoBehaviour
     {
         // Get all components   
         PlayerMovement = GetComponent<PlayerMovementHandler>();
-        PlayerWeapon = GetComponent<PlayerWeaponHandler>();
+        PlayerWeapon = GetComponent<WeaponHandler>();
         PlayerRigidbody = GetComponent<Rigidbody2D>();
 
+        // Initialize components
         PlayerMovement.Initialize(this);
+        PlayerWeapon.Initialize(gameObject);
     }
 
 
     void Update()
     {
         //_state.OnUpdate();
+        PlayerWeapon.HandleWeapon();
         
     }
 
