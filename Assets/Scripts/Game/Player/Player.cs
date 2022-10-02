@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     public PlayerMovementHandler PlayerMovement { get; private set; }
     public WeaponHandler PlayerWeapon { get; private set; }
     public Rigidbody2D PlayerRigidbody { get; private set; }
-
+    public PlayerAnimationController PlayerAnimationController { get; private set; }
     private IPlayerState _state;
 
     void Start()

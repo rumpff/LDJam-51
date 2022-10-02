@@ -87,7 +87,7 @@ public class PlayerStateDead : IPlayerState
 {
     public void OnEnter(ref Player p)
     {
-
+        p.PlayerAnimationController.SetPlayerDead(true);
     }
 
     public void OnUpdate()
