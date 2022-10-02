@@ -13,8 +13,9 @@ public interface IWeaponState
 public class PlayerWieldingState : IWeaponState
 {
     private Player _player;
-    private PlayerWeaponHandler weaponHandler;
+    private PlayerWeaponHandler _weaponHandler;
     private WeaponScriptableObject _equippedWeapon;
+
 
     public PlayerWieldingState(Player p)
     {
@@ -23,23 +24,23 @@ public class PlayerWieldingState : IWeaponState
 
     public void OnEnter(WeaponHandler weaponHandler, WeaponScriptableObject equippedWeapon)
     {
-        weaponHandler = this.weaponHandler;
+        _weaponHandler = weaponHandler as PlayerWeaponHandler;
         _equippedWeapon = equippedWeapon;
     }
 
     public void OnUpdate()
     {
-        if(weaponHandler.CheckShootInput())
-            weaponHandler.UnArm();
+        if(_weaponHandler.CheckThrowInput())
+            _weaponHandler.UnArm();
 
-        if(weaponHandler.CheckShootInput())
+        if(_weaponHandler.CheckShootInput())
             OnFire();
     }
 
     public void OnFire()
     {
         // Check if able to shoot
-        weaponHandler.Fire();
+        _weaponHandler.Fire();
     }
 
     public void OnExit()
@@ -50,20 +51,25 @@ public class PlayerWieldingState : IWeaponState
 public class PlayerUnArmedState : IWeaponState
 {
     protected WeaponScriptableObject EquippedWeapon;
+    private PlayerWeaponHandler _weaponHandler;
 
     public void OnEnter(WeaponHandler weaponHandler, WeaponScriptableObject equippedWeapon)
     {
+        _weaponHandler = weaponHandler as PlayerWeaponHandler;
         EquippedWeapon = equippedWeapon;
     }
 
     public void OnUpdate()
     {
-        
+
+        if (_weaponHandler.CheckShootInput())
+            OnFire();
     }
 
     public void OnFire()
     {
-
+        // Check if able to shoot
+        _weaponHandler.Fire();
     }
 
     public void OnExit()

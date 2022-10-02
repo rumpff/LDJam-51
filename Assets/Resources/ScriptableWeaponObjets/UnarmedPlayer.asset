@@ -15,5 +15,6 @@ MonoBehaviour:
   _cooldownDuration: 0.1
   _bulletAmount: 1
   _timeBetweenShots: 0
-  _weaponPrefab: {fileID: 0}
+  _bulletBehaviour: {fileID: 0}
+  _weaponPrefab: {fileID: 7700800900135429206, guid: 42629ab054340464b828f878418122b0, type: 3}
   _bulletPrefab: {fileID: 0}

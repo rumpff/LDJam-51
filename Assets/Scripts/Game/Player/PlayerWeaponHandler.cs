@@ -5,16 +5,8 @@ using UnityEngine;
 
 public class PlayerWeaponHandler : WeaponHandler
 {
-    public Vector2 AimDirection { get; private set; }
-
-    public float AimAngle
-    {
-        get
-        {
-            Vector2 playerPos = (Vector2)_player.transform.position;
-            return Mathf.Atan2(AimDirection.y - playerPos.y, AimDirection.x - playerPos.x);
-        }
-    }
+    [SerializeField] private Transform _weaponParent;
+    [SerializeField] private WeaponScriptableObject test;
 
     private Player _player;
 
@@ -26,17 +18,28 @@ public class PlayerWeaponHandler : WeaponHandler
 
         _player = owner.GetComponent<Player>();
         UnArm();
+        WeaponPickup(new PlayerWieldingState(_player), test);
     }
 
     public override void HandleWeapon()
     {
         base.HandleWeapon();
         UpdateAimDirection();
+
+        DebugText.Instance.AddText($"AimAngle: {AimAngle}");
     }
 
     public override void Fire()
     {
+        Weapon?.TriggerHeld();
+    }
+    public override void NewWeaponInstance(WeaponScriptableObject weapon)
+    {
+        base.NewWeaponInstance(weapon);
 
+        var weaponGameObject = Instantiate(weapon.WeaponPrefab, _weaponParent);
+        Weapon = weaponGameObject.GetComponent<Weapon>();
+        Weapon.Initialize(weapon, this);
     }
 
     // Read and apply mouse aim
@@ -45,8 +48,6 @@ public class PlayerWeaponHandler : WeaponHandler
         Vector3 aimPos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
         aimPos = Camera.main.ScreenToWorldPoint(aimPos);
         AimDirection = aimPos - _player.transform.position;
-
-        Debug.Log(AimAngle * Mathf.Rad2Deg);
     }
 
     /// <summary>

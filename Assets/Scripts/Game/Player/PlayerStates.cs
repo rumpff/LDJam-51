@@ -21,13 +21,12 @@ public class PlayerAliveState : IPlayerState
 
     public virtual void OnUpdate()
     {
-        _player.PlayerMovement.HandleMovement();
         _player.PlayerWeapon.HandleWeapon();
     }
 
     public virtual void OnFixedUpdate()
     {
-
+        _player.PlayerMovement.HandleMovement();
     }
 
     public virtual void OnExit()
