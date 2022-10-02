@@ -50,8 +50,9 @@ public class PlayerMovementHandler : MonoBehaviour
     private void ApplyVelocity()
     {
         Rigidbody2D rigidbody = _player.PlayerRigidbody;
-        Vector2 velocity = rigidbody.velocity;
 
-        rigidbody.velocity = Vector2.Lerp(rigidbody.velocity, _inputVector * MaxSpeed, 10 * Time.fixedDeltaTime);
+        float acc = _inputVector != Vector2.zero ? Acceleration : DeAcceleration;
+
+        rigidbody.velocity = Vector2.Lerp(rigidbody.velocity, _inputVector * MaxSpeed, acc * Time.fixedDeltaTime);
     }
 }

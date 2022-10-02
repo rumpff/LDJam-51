@@ -10,49 +10,75 @@ public interface IPlayerState
     void OnExit();
 }
 
-public class PlayerStateHealthy : IPlayerState
+public class PlayerAliveState : IPlayerState
 {
-    public void OnEnter(ref Player p)
+    protected Player _player;
+
+    public virtual void OnEnter(ref Player p)
     {
-        
+        _player = p;
     }
 
-    public void OnUpdate()
+    public virtual void OnUpdate()
     {
-
+        _player.PlayerWeapon.HandleWeapon();
     }
 
-    public void OnFixedUpdate()
+    public virtual void OnFixedUpdate()
     {
-
+        _player.PlayerMovement.HandleMovement();
     }
 
-    public void OnExit()
+    public virtual void OnExit()
     {
 
     }
 }
 
-public class PlayerStateDamaged : IPlayerState
+
+public class PlayerStateHealthy : PlayerAliveState
 {
-    public void OnEnter(ref Player p)
+    public override void OnEnter(ref Player p)
     {
-
+        base.OnEnter(ref p);
     }
 
-    public void OnUpdate()
+    public override void OnUpdate()
     {
-
+        base.OnUpdate();
     }
 
-    public void OnFixedUpdate()
+    public override void OnFixedUpdate()
     {
-
+        base.OnFixedUpdate();
     }
 
-    public void OnExit()
+    public override void OnExit()
     {
+        base.OnExit();
+    }
+}
 
+public class PlayerStateDamaged : PlayerAliveState
+{
+    public override void OnEnter(ref Player p)
+    {
+        base.OnEnter(ref p);
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+
+    public override void OnFixedUpdate()
+    {
+        base.OnFixedUpdate();
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
     }
 }
 
@@ -60,7 +86,7 @@ public class PlayerStateDead : IPlayerState
 {
     public void OnEnter(ref Player p)
     {
-
+        p.PlayerAnimationController.SetPlayerDead(true);
     }
 
     public void OnUpdate()
