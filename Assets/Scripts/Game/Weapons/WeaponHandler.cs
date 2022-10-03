@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class WeaponHandler : MonoBehaviour
@@ -25,6 +24,7 @@ public class WeaponHandler : MonoBehaviour
     public virtual void Initialize(GameObject owner)
     {
         Weapon = null;
+        AimDirection = Vector2.zero;
     }
 
     public virtual void HandleWeapon()

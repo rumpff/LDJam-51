@@ -77,3 +77,37 @@ public class PlayerUnArmedState : IWeaponState
 
     }
 }
+
+public class EnemyArmedState : IWeaponState
+{
+    protected WeaponScriptableObject EquippedWeapon;
+    private EnemyWeaponHandler _weaponHandler;
+
+    public void OnEnter(WeaponHandler weaponHandler, WeaponScriptableObject equippedWeapon)
+    {
+        _weaponHandler = weaponHandler as EnemyWeaponHandler;
+        EquippedWeapon = equippedWeapon;
+    }
+
+    public void OnUpdate()
+    {
+        float distanceToPlayer = Vector2.Distance(_weaponHandler.transform.position,
+            Managers.Instance.GameManager.Player.transform.position);
+
+        if(distanceToPlayer <= EquippedWeapon.AiShootingDistance)
+            OnFire();
+
+        DebugText.Instance.AddText($"Distance to player: {distanceToPlayer}");
+    }
+
+    public void OnFire()
+    {
+        // Check if able to shoot
+        _weaponHandler.Fire();
+    }
+
+    public void OnExit()
+    {
+
+    }
+}

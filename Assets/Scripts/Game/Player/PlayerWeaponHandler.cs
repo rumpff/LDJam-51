@@ -14,8 +14,6 @@ public class PlayerWeaponHandler : WeaponHandler
     {
         base.Initialize(owner);
 
-        AimDirection = Vector2.zero;
-
         _player = owner.GetComponent<Player>();
         UnArm();
         WeaponPickup(new PlayerWieldingState(_player), test);

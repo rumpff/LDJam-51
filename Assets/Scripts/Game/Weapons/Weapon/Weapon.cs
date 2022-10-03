@@ -42,7 +42,7 @@ public class Weapon : MonoBehaviour
         if (_cooldownTimer > 0)
             _cooldownTimer -= Time.deltaTime;
 
-        DebugText.Instance.AddText($"Cooldown: {_cooldownTimer}");
+        DebugText.Instance.AddText($"Cooldown: {NormalizedCooldown}");
     }
 
     public void Explode()

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface IPlayerState
 {
-    void OnEnter(ref Player p);
+    void OnEnter(Player p);
     void OnUpdate();
     void OnFixedUpdate();
     void OnExit();
@@ -14,7 +14,7 @@ public class PlayerAliveState : IPlayerState
 {
     protected Player _player;
 
-    public virtual void OnEnter(ref Player p)
+    public virtual void OnEnter(Player p)
     {
         _player = p;
     }
@@ -38,9 +38,9 @@ public class PlayerAliveState : IPlayerState
 
 public class PlayerStateHealthy : PlayerAliveState
 {
-    public override void OnEnter(ref Player p)
+    public override void OnEnter(Player p)
     {
-        base.OnEnter(ref p);
+        base.OnEnter(p);
     }
 
     public override void OnUpdate()
@@ -59,11 +59,11 @@ public class PlayerStateHealthy : PlayerAliveState
     }
 }
 
-public class PlayerStateDamaged : PlayerAliveState
+public class PlayerStateHunting : PlayerAliveState
 {
-    public override void OnEnter(ref Player p)
+    public override void OnEnter(Player p)
     {
-        base.OnEnter(ref p);
+        base.OnEnter(p);
     }
 
     public override void OnUpdate()
@@ -84,7 +84,7 @@ public class PlayerStateDamaged : PlayerAliveState
 
 public class PlayerStateDead : IPlayerState
 {
-    public void OnEnter(ref Player p)
+    public void OnEnter(Player p)
     {
         p.PlayerAnimationController.SetPlayerDead(true);
     }
