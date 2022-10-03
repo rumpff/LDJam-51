@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PlayerWeaponHandler : WeaponHandler
 {
+    public float WeaponThrowForce;
     [SerializeField] private Transform _weaponParent;
     [SerializeField] private WeaponScriptableObject test;
 
@@ -52,6 +53,18 @@ public class PlayerWeaponHandler : WeaponHandler
         Vector3 aimPos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z);
         aimPos = Camera.main.ScreenToWorldPoint(aimPos);
         AimDirection = aimPos - _player.transform.position;
+    }
+
+    public void ThrowCurrentWeapon()
+    {
+        GameObject g = Instantiate(Managers.Instance.GameManager.WeaponPickupPrefab);
+        g.transform.position = _weaponParent.position;
+
+        WeaponPickup weaponPickup = g.GetComponent<WeaponPickup>();
+        weaponPickup.Initialize();
+
+        weaponPickup.Weapon = State.EquippedWeapon();
+        weaponPickup.AddForce(AimDirection * WeaponThrowForce);
     }
 
     /// <summary>

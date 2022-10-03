@@ -49,8 +49,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AutoInitialize: 0
+  IsDetonating: 0
+  DetonateTimer: 0
   Weapon: {fileID: 11400000, guid: 5354e39e209033d4c88a2e64cd46d840, type: 2}
   _modelParent: {fileID: 2575571041723606242}
+  _rigidbody: {fileID: 7519850678746861015}
+  _triggerCollider: {fileID: 6649972000594752143}
 --- !u!58 &6649972000594752143
 CircleCollider2D:
   m_ObjectHideFlags: 0

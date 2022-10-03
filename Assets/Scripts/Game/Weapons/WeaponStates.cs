@@ -8,6 +8,7 @@ public interface IWeaponState
     void OnUpdate();
     void OnFire();
     void OnExit();
+    WeaponScriptableObject EquippedWeapon();
 }
 
 public class PWeaponWieldingState : IWeaponState
@@ -45,18 +46,23 @@ public class PWeaponWieldingState : IWeaponState
 
     public void OnExit()
     {
-        // throw
+        _weaponHandler.ThrowCurrentWeapon();
+    }
+
+    public WeaponScriptableObject EquippedWeapon()
+    {
+        return _equippedWeapon;
     }
 }
 public class PWeaponUnArmedState : IWeaponState
 {
-    protected WeaponScriptableObject EquippedWeapon;
+    protected WeaponScriptableObject _equippedWeapon;
     private PlayerWeaponHandler _weaponHandler;
 
     public void OnEnter(WeaponHandler weaponHandler, WeaponScriptableObject equippedWeapon)
     {
         _weaponHandler = weaponHandler as PlayerWeaponHandler;
-        EquippedWeapon = equippedWeapon;
+        _equippedWeapon = equippedWeapon;
     }
 
     public void OnUpdate()
@@ -76,17 +82,23 @@ public class PWeaponUnArmedState : IWeaponState
     {
 
     }
+
+    public WeaponScriptableObject EquippedWeapon()
+    {
+    
+        return _equippedWeapon;
+    }
 }
 
 public class EWeaponArmedState : IWeaponState
 {
-    protected WeaponScriptableObject EquippedWeapon;
+    protected WeaponScriptableObject _equippedWeapon;
     private EnemyWeaponHandler _weaponHandler;
 
     public void OnEnter(WeaponHandler weaponHandler, WeaponScriptableObject equippedWeapon)
     {
         _weaponHandler = weaponHandler as EnemyWeaponHandler;
-        EquippedWeapon = equippedWeapon;
+        _equippedWeapon = equippedWeapon;
     }
 
     public void OnUpdate()
@@ -94,7 +106,7 @@ public class EWeaponArmedState : IWeaponState
         float distanceToPlayer = Vector2.Distance(_weaponHandler.transform.position,
             Managers.Instance.GameManager.Player.transform.position);
 
-        if(distanceToPlayer <= EquippedWeapon.AiShootingDistance)
+        if(distanceToPlayer <= _equippedWeapon.AiShootingDistance)
             OnFire();
 
         DebugText.Instance.AddText($"Distance to player: {distanceToPlayer}");
@@ -109,5 +121,10 @@ public class EWeaponArmedState : IWeaponState
     public void OnExit()
     {
 
+    }
+
+    public WeaponScriptableObject EquippedWeapon()
+    {
+        return _equippedWeapon;
     }
 }
