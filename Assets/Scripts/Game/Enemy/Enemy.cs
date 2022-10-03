@@ -30,7 +30,9 @@ public class Enemy : MonoBehaviour
     {
         _weaponHandler.Initialize(gameObject);
         _weaponHandler.WeaponPickup(new EnemyArmedState(), weapon);
-        SwitchState(new EnemyAliveState());   
+        SwitchState(new EnemyAliveState());
+
+        _aiPath.endReachedDistance = weapon.AiDesiredPlayerDistance;
     }
 
     // Update is called once per frame
