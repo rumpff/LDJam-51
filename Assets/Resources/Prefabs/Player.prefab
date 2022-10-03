@@ -175,7 +175,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UnarmedScriptableObject: {fileID: 11400000, guid: 20d2d49f9cd25cb4c9407ff8a836a3b1, type: 2}
   _explodingWeapons: 0
-  WeaponThrowForce: 200
+  WeaponThrowForce: 350
   _weaponParent: {fileID: 7403267192851879341}
   test: {fileID: 11400000, guid: 5354e39e209033d4c88a2e64cd46d840, type: 2}
 --- !u!114 &3063096347730556938
