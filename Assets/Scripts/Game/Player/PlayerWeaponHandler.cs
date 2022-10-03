@@ -16,7 +16,7 @@ public class PlayerWeaponHandler : WeaponHandler
 
         _player = owner.GetComponent<Player>();
         UnArm();
-        WeaponPickup(new PlayerWieldingState(_player), test);
+        WeaponPickup(new PWeaponWieldingState(_player), test);
     }
 
     public override void HandleWeapon()

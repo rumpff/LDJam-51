@@ -48,10 +48,10 @@ public class Player : MonoBehaviour
         if (collision.gameObject.tag == "WeaponPickup")
         {
             DebugText.Instance.AddText("WE ARE IN PICKUP!!!");
-            if (PlayerWeapon.State.GetType() == typeof(PlayerUnArmedState))
+            if (PlayerWeapon.State.GetType() == typeof(PWeaponUnArmedState))
             {
                 WeaponPickup wPickup = collision.gameObject.GetComponent<WeaponPickup>();
-                PlayerWeapon.WeaponPickup(new PlayerWieldingState(this), wPickup.Weapon);
+                PlayerWeapon.WeaponPickup(new PWeaponWieldingState(this), wPickup.Weapon);
                 wPickup.PickedUp();
             }
         }

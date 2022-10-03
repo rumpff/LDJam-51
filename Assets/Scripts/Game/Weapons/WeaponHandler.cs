@@ -72,6 +72,6 @@ public class WeaponHandler : MonoBehaviour
     /// </summary>
     public void UnArm()
     {
-        UnArm(new PlayerUnArmedState(), UnarmedScriptableObject);
+        UnArm(new PWeaponUnArmedState(), UnarmedScriptableObject);
     }
 }

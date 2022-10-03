@@ -10,14 +10,14 @@ public interface IWeaponState
     void OnExit();
 }
 
-public class PlayerWieldingState : IWeaponState
+public class PWeaponWieldingState : IWeaponState
 {
     private Player _player;
     private PlayerWeaponHandler _weaponHandler;
     private WeaponScriptableObject _equippedWeapon;
 
 
-    public PlayerWieldingState(Player p)
+    public PWeaponWieldingState(Player p)
     {
         _player = p;
     }
@@ -48,7 +48,7 @@ public class PlayerWieldingState : IWeaponState
         // throw
     }
 }
-public class PlayerUnArmedState : IWeaponState
+public class PWeaponUnArmedState : IWeaponState
 {
     protected WeaponScriptableObject EquippedWeapon;
     private PlayerWeaponHandler _weaponHandler;
@@ -78,7 +78,7 @@ public class PlayerUnArmedState : IWeaponState
     }
 }
 
-public class EnemyArmedState : IWeaponState
+public class EWeaponArmedState : IWeaponState
 {
     protected WeaponScriptableObject EquippedWeapon;
     private EnemyWeaponHandler _weaponHandler;

@@ -29,7 +29,7 @@ public class Enemy : MonoBehaviour
     void Initialize(WeaponScriptableObject weapon)
     {
         _weaponHandler.Initialize(gameObject);
-        _weaponHandler.WeaponPickup(new EnemyArmedState(), weapon);
+        _weaponHandler.WeaponPickup(new EWeaponArmedState(), weapon);
         SwitchState(new EnemyAliveState());
 
         _aiPath.endReachedDistance = weapon.AiDesiredPlayerDistance;
