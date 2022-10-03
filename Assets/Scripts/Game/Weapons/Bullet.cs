@@ -36,25 +36,28 @@ public class Bullet : MonoBehaviour
         switch (collision.gameObject.tag)
         {
             case "Player":
-                {
-                    if (_behaviour.DestroyOnKill)
-                        Kill();
-                }
-                break;
+            {
+                if (_behaviour.DestroyOnKill)
+                    Kill();
+            }
+            break;
 
             case "Enemy":
-                {
-                    if (_behaviour.DestroyOnKill)
-                        Kill();
-                }
-                break;
+            {
+                Enemy e = collision.gameObject.GetComponent<Enemy>();
+                e.BulletHit();
+
+                if (_behaviour.DestroyOnKill)
+                    Kill();
+            }
+            break;
 
             default:
-                {
-                    if(_behaviour.DestroyOnImpact)
-                        Kill();
-                }
-                break;
+            {
+                if(_behaviour.DestroyOnImpact)
+                    Kill();
+            }
+            break;
         }
     }
 

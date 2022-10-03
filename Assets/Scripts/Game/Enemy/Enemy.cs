@@ -47,4 +47,9 @@ public class Enemy : MonoBehaviour
         _state = state;
         _state.OnEnter(this);
     }
+
+    public void BulletHit()
+    {
+        gameObject.SetActive(false);
+    }
 }
