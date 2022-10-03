@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -23,6 +25,10 @@ public class Player : MonoBehaviour
         PlayerWeapon.Initialize(gameObject);
     }
 
+    public void Initialize()
+    {
+
+    }
 
     void Update()
     {
@@ -35,5 +41,19 @@ public class Player : MonoBehaviour
     {
         //_state.OnFixedUpdate();
         PlayerMovement.HandleMovement();
+    }
+
+    void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "WeaponPickup")
+        {
+            DebugText.Instance.AddText("WE ARE IN PICKUP!!!");
+            if (PlayerWeapon.State.GetType() == typeof(PlayerUnArmedState))
+            {
+                WeaponPickup wPickup = collision.gameObject.GetComponent<WeaponPickup>();
+                PlayerWeapon.WeaponPickup(new PlayerWieldingState(this), wPickup.Weapon);
+                wPickup.PickedUp();
+            }
+        }
     }
 }

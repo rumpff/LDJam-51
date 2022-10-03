@@ -17,7 +17,7 @@ public class WeaponHandler : MonoBehaviour
 
     [SerializeField] protected WeaponScriptableObject UnarmedScriptableObject;
     [SerializeField] protected bool _explodingWeapons;
-    protected IWeaponState _weaponState;
+    public IWeaponState State { get; protected set; }
 
     public bool ExplodingWeapons => _explodingWeapons;
 
@@ -29,7 +29,7 @@ public class WeaponHandler : MonoBehaviour
 
     public virtual void HandleWeapon()
     {
-        _weaponState?.OnUpdate();
+        State?.OnUpdate();
         Weapon.UpdateWeapon();
     }
 
@@ -45,20 +45,20 @@ public class WeaponHandler : MonoBehaviour
 
     public void WeaponPickup(IWeaponState state, WeaponScriptableObject weapon)
     {
-        _weaponState?.OnExit();
-        _weaponState = state;
+        State?.OnExit();
+        State = state;
 
         NewWeaponInstance(weapon);
-        _weaponState.OnEnter(this, weapon);
+        State.OnEnter(this, weapon);
     }
 
     public void UnArm(IWeaponState state, WeaponScriptableObject weapon)
     {
-        _weaponState?.OnExit();
-        _weaponState = state;
+        State?.OnExit();
+        State = state;
 
         NewWeaponInstance(weapon);
-        _weaponState.OnEnter(this, weapon);
+        State.OnEnter(this, weapon);
     }
 
     public virtual void NewWeaponInstance(WeaponScriptableObject weapon)
