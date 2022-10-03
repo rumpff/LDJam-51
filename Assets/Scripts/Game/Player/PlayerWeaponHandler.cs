@@ -49,7 +49,7 @@ public class PlayerWeaponHandler : WeaponHandler
     // Read and apply mouse aim
     public void UpdateAimDirection()
     {
-        Vector3 aimPos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
+        Vector3 aimPos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z);
         aimPos = Camera.main.ScreenToWorldPoint(aimPos);
         AimDirection = aimPos - _player.transform.position;
     }
